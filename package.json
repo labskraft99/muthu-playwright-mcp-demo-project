@@ -8,6 +8,10 @@
     "test:headed": "npx playwright test --headed",
     "test:debug": "npx playwright test --debug",
     "test:ui": "npx playwright test --ui",
+    "test:chrome": "npx playwright test --project=chromium",
+    "test:chrome:slack": "npx playwright test --project=chromium --reporter=./reporters/slack-reporter.js",
+    "test:slack": "npx playwright test --reporter=./reporters/slack-reporter.js",
+    "generate:data": "npx ts-node utils/generateTestData.ts",
     "report": "npx playwright show-report",
     "install:browsers": "npx playwright install"
   },
@@ -23,6 +27,7 @@
     "@playwright/test": "^1.40.0",
     "@types/node": "^20.0.0",
     "@types/xlsx": "^0.0.35",
+    "ts-node": "^10.9.2",
     "typescript": "^5.0.0"
   },
   "dependencies": {

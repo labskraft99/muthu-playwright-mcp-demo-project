@@ -21,7 +21,18 @@ export default defineConfig({
   reporter: [
     ['html', { outputFolder: 'playwright-report' }],
     ['json', { outputFile: 'test-results/results.json' }],
-    ['junit', { outputFile: 'test-results/results.xml' }]
+    ['junit', { outputFile: 'test-results/results.xml' }],
+    ['list'], // Console output
+    ['./reporters/slack-reporter.ts', {
+      slackWebhookUrl: process.env.SLACK_WEBHOOK_URL,
+      teamsWebhookUrl: process.env.TEAMS_WEBHOOK_URL,
+      environment: process.env.ENVIRONMENT || 'development',
+      projectName: process.env.PROJECT_NAME || 'Playwright Tests',
+      onlyOnFailure: process.env.ONLY_ON_FAILURE === 'true',
+      includeScreenshots: process.env.INCLUDE_SCREENSHOTS !== 'false',
+      maxFailuresToShow: parseInt(process.env.MAX_FAILURES_TO_SHOW || '5'),
+      ciUrl: process.env.CI_URL
+    }]
   ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
